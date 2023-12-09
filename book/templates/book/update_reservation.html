@@ -1,0 +1,48 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+	{% if user.get_username == reservation.name %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h1>Update Reservation</h1>
+		
+		<br/>
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{ form.as_p}}
+			<br/>
+			<input type="submit" value="Update" class='btn btn-secondary'>
+		</div>
+	{% else %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h2>Access Denied</h2>
+			<!--<p>Only user: {{ reservation.name }} can edit this reservation</p>-->
+			<br/>
+			Logged In User: {{ user }}<br>
+			Owner of Reservation: {{ reservation.name }}
+		</div>
+	{% endif %}
+
+{% else %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+		<h1>Sorry! You are not Logged In</h1>
+
+		<a href="{% url 'login' %}">Login Here</a>
+	<div class="shadow p-4 mb-5 bg-body rounded">
+{% endif %}
+
+{% endblock content %}

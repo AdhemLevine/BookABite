@@ -1,0 +1,40 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+		<h1>Tables:</h1>
+	</div>
+
+	{% for venue  in table %}
+	
+		<center>
+			<div class="card" style="width: 30rem;">
+			{% if venue.table_image %}
+			  <img src="{{ venue.table_image.url }}" class="card-img-top" alt="...">
+			{% endif %}
+			  <div class="card-body">
+			    <h5 class="card-title">Table:</h5>
+			    <p class="card-text">{{ venue.number_table}}</p>
+			    <a href="{% url 'add-reservation' %}" class="btn btn-primary">BOOK NOW</a>
+			  </div>
+			</div>
+			<br/>
+		</center>
+
+	{% endfor%}
+
+
+{% endblock content %}

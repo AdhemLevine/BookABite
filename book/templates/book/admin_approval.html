@@ -1,0 +1,57 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+		<h1>Admin Approvals</h1>
+	</div>
+
+	{% for reservation in reservation_list %}
+	
+	<form action="" method="POST">
+		{% csrf_token %}
+
+		<div class="card">
+		  <div class="card-header">
+		    <strong>{{ reservation.name }}</strong>
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title">Date: {{ reservation.reserve_date }}</h5>
+		    <p class="card-text">
+		    	<ul>
+					<li>Table: {{ reservation.table }}</li>
+					<li>No. of Guest: {{ reservation.no_guest }}</li>
+					<li>Phone no: {{ reservation.phone }}</li>
+					<li>Method of payment: {{ reservation.payment }}</li>
+					<li>Approved:
+						{% if reservation.approved %}
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" checked="checked" value="{{ reservation.id }}" name="boxes">	
+							</div>
+						{% else %}
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="{{ reservation.id }}" name="boxes">	
+							</div>
+						{% endif %}
+					</li>
+				</ul>
+		    </p>
+		  </div>
+		 </div>
+		 <br/>
+ 	{% endfor %}
+	
+<button class="btn btn-secondary" type="submit">Update Approval</button>
+
+{% endblock content %}

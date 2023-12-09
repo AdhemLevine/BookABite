@@ -1,0 +1,43 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+		<center>
+			<h1>WELCOME TO BOOKABITE!</h1>
+		</center>
+		<br/>
+		<p>Welcome to BookABite, your go-to destination for hassle-free dining reservations! Located in the heart of Alangilan, Batangas City within the esteemed GCH, we strive to redefine your dining experience.</p>
+		<h6>Our Vision:</h6>
+		<p>At BookABite, we believe that every meal is an opportunity to create lasting memories. Our vision is to simplify the way you enjoy dining by providing a seamless online platform for reserving tables at our esteemed restaurant.</p>
+		<h6>The BookABite Experience</h6>
+		Convenience meets excellence at BookABite. We understand the value of your time and the importance of a well-curated dining experience. With a few clicks, you can secure your spot at our restaurant, ensuring a delightful and stress-free dining venture.
+		<br/>
+		<h6>What Sets Us Apart?</h6>
+		Effortless Reservations: Say goodbye to long waiting times and uncertainties. With BookABite, securing a table is quick and effortless.
+		<br/>
+		<h6>Personalized Service: </h6>
+		We prioritize your preferences, ensuring that your dining experience aligns perfectly with your expectations.
+		<br/>
+		<h6>Prime Location: </h6>
+		Nestled within GCH at Alangilan, Batangas City, our restaurant offers a welcoming ambiance and a convenient locale for locals and visitors alike.
+		<br/>
+		<h6>Our Commitment</h6>
+		<p>BookABite is committed to exceeding your culinary expectations. Whether you're celebrating a special occasion or simply craving an exceptional meal, our team is dedicated to ensuring your satisfaction from the moment you make your reservation until the last bite of your meal.</p>
+		<br/>
+		<p>Thank you for choosing BookABite for your dining adventures. We look forward to serving you!</p>
+	</div>
+
+{% endblock %}

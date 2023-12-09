@@ -1,0 +1,62 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+	<div class="shadow p-4 mb-5 bg-body rounded">
+		<center>
+			<h1>WELCOME TO BOOKABITE!</h1>
+
+			As of {{ time }}
+			<br/><br/><br/><br/>
+			{{ cal|safe }}
+		</center>
+	</div>
+	<br/> <br/>
+			{% if user.is_superuser %}
+				<div class="shadow p-4 mb-5 bg-body rounded">
+					<h3>Reservations This Month</h3>
+				</div>
+					{% if reservation_list %}
+						{% for reservation in reservation_list %}
+							<div class="card">
+							  <div class="card-header">
+							    <strong>{{ reservation.name }}</strong>
+							  </div>
+							  <div class="card-body">
+							    <h5 class="card-title">Date: {{ reservation.reserve_date }}</h5>
+							    <p class="card-text">
+							    	<ul>
+										<li>Table: {{ reservation.table }}</li>
+										<li>No. of Guest: {{ reservation.no_guest }}</li>
+										<li>Phone no: {{ reservation.phone }}</li>
+										<li>Method of payment: {{ reservation.payment }}</li>
+										<li>Approved: {{ reservation.approved }}</li>
+									</ul>
+							    </p>
+							  </div>
+							</div>
+							<br/><br/>
+						{% endfor %}
+
+					{% else %}
+						No Reservations This Month
+					{% endif%}
+			{% endif %}
+			 
+		<center>
+			Copyright (c) {{ current_year}}
+		</center>
+		
+{% endblock content %}

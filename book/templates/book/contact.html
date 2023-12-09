@@ -1,0 +1,44 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <center>
+        <figure class="figure">
+          <img src="{% static 'img/book-a-bite.png' %}" class="figure-img img-fluid rounded" alt="...">
+        </figure>
+    </center>
+
+    <div class="shadow p-4 mb-5 bg-body rounded">
+        <center>
+            <h2><strong>You Can Contact Us At:</strong></h2>
+        </center>
+
+        <p><span class="material-icons">language</span>
+            www.bookAbite.com.ph
+        </p>
+        <p><span class="material-icons">email</span>
+            booknow.bookabite@gmail.com
+        </p>
+        <p><span class="material-icons">local_phone</span>
+            123-456-789
+        </p>
+
+
+    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<center>
+				<h1><strong>Book Now!</strong></h1>
+				<br/><br/>
+
+					{% if subitted %}
+						Your Reservation Was Submitted
+						Successfully
+
+					{% else %}
+						<form action="" method="POST">
+							{% csrf_token %}
+
+							{{ form.as_p }}
+
+							<input type="submit" value="Submit" class='btn btn-secondary'>
+							
+						</form>
+							
+					{% endif %}
+			</center>
+		</div>
+		<br/><br/>
+	{% else %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h1>Sorry! You are not Logged In</h1>
+
+			<a href="{% url 'login' %}">Login Here</a>
+		</div>
+	{% endif %}
+{% endblock content %}

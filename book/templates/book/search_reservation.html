@@ -1,0 +1,60 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+
+	{% if searched %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h1>Search Results: {{ searched }}</h1>
+		</div>
+		<br/>
+		{% for reservation in reservations%}
+	
+			<div class="card">
+			  <div class="card-header">
+			    <strong>{{ reservation.name }}</strong>
+			  </div>
+			  <div class="card-body">
+			    <h5 class="card-title">Date: {{ reservation.reserve_date }}</h5>
+			    <p class="card-text">
+			    	<ul>
+						<li>Table: {{ reservation.table }}</li>
+						<li>No. of Guest: {{ reservation.no_guest }}</li>
+						<li>Phone no: {{ reservation.phone }}</li>
+						<li>Method of payment: {{ reservation.payment }}</li>
+						<li>Approved: {{ reservation.approved }}</li>
+					</ul>
+			    </p>
+			  </div>
+			  {% if user.get_username == reservation.name %} 
+				<div class="card-footer text-muted">
+				   	<a href="{% url 'update-reservation' reservation.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+
+				   	<a href="{% url 'delete-reservation' reservation.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+
+	      		</div>
+      		{% endif %}
+			</div>
+			<br/>
+		{% endfor%}
+
+	{% else %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h1>No Search Results Found!</h1>
+		</div>
+
+	{% endif %}
+
+{% endblock content %}

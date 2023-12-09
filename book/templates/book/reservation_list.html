@@ -1,0 +1,82 @@
+{% extends 'book/base.html' %}
+{% load static %}
+
+{% block background_style %}
+    <style>
+        body {
+            background-image: url('{% static "img/home_page.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+		<div class="shadow p-4 mb-5 bg-body rounded">
+			<h1>Reservations</h1>
+		</div>
+		<br/>
+
+		{% for reservation in reservations %}
+
+			<div class="card">
+			  <div class="card-header">
+			    <strong>{{ reservation.name }}</strong>
+			  </div>
+			  <div class="card-body">
+			    <h5 class="card-title">Date: {{ reservation.reserve_date }}</h5>
+			    <p class="card-text">
+			    	<ul>
+						<li>Table: {{ reservation.table }}</li>
+						<li>No. of Guest: {{ reservation.no_guest }}</li>
+						<li>Phone no: {{ reservation.phone }}</li>
+						<li>Method of payment: {{ reservation.payment }}</li>
+						<li>Approved: {{ reservation.approved }}</li>
+					</ul>
+			    </p>
+			  </div>
+			{% if user.get_username == reservation.name %}  
+			  <div class="card-footer text-muted">
+			   	<a href="{% url 'update-reservation' reservation.id %}" class="btn btn-outline-secondary btn-sm">Update</a>
+
+			   	<a href="{% url 'delete-reservation' reservation.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+
+		      </div>
+		    {% endif %}
+			</div>
+				<br/><br/>
+		{% endfor %}
+
+		<hr>
+
+		<nav aria-label="Page navigation example">
+		  <ul class="pagination justify-content-center">
+
+				{% if reservations.has_previous %}
+					<li class="page-item"><a class="page-link" href="?page=1">&laquo First</a></li>
+
+					<li class="page-item"><a class="page-link" href="?page={{ reservations.previous_page_number }}">Previous</a></li>
+
+				{% endif %}
+
+				<li class="page-item disabled"><a class="page-link" href="#" >Page {{ reservations.number }} of {{ reservations.paginator.num_pages }}</a></li>
+
+				{% if reservations.has_next %}
+					<li class="page-item"><a class="page-link" href="?page={{ reservations.next_page_number }}">Next</a></li>
+
+					<li class="page-item"><a class="page-link" href="?page={{ reservations.paginator.num_pages }}">Last &raquo</a></li>
+
+				{% endif %}
+
+		 </ul>
+		</nav>
+	{% else %}
+		<h1>Sorry! You are not Logged In</h1>
+
+		<a href="{% url 'login' %}">Login Here</a>
+	{% endif %}
+
+{% endblock content %}
